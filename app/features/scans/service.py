@@ -95,9 +95,15 @@ def delete_scan(db: Session, scan_id: int):
     db.commit()
     return {"message": "Data deleted successfully"}
 
-def get_scan_history(db: Session, skip: int = 0, limit: int = 10):
-    # Query dasar dengan Join
-    query = db.query(Scan).order_by(desc(Scan.created_at))
+def get_scan_history(db: Session, skip: int = 0, limit: int = 10, app_platform:str = None):
+
+    query = db.query(Scan)
+
+    if app_platform:
+        query = query.filter(Scan.app_platform == app_platform)
+ 
+
+    query = query.order_by(desc(Scan.created_at))
     
     total = query.count()
     scans = query.offset(skip).limit(limit).all()

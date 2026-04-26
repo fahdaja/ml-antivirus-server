@@ -40,6 +40,7 @@ def delete_scan_data(
 def read_scan_history(
     skip: int = 0, 
     limit: int = 10, 
+    app_platform:str = None,
     db: Session = Depends(get_db)
 ):
     """
@@ -47,4 +48,4 @@ def read_scan_history(
     - skip: jumlah data yang dilewati (default 0)
     - limit: jumlah data yang diambil (default 10)
     """
-    return get_scan_history(db, skip=skip, limit=limit)
+    return get_scan_history(db, skip=skip, limit=limit, app_platform=app_platform)

@@ -20,6 +20,7 @@ class ScanResponse(BaseModel):
     file_size: int
     status: str
     prediction: Optional[str] = None
+    app_platform: app_type
     created_at: datetime
 
     class Config:
